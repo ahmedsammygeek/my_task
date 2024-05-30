@@ -18,6 +18,7 @@ class RoomController extends Controller
      */
     public function index()
     {
+        $this->authorize('list rooms');
         return view('board.rooms.index');
     }
 
@@ -26,6 +27,7 @@ class RoomController extends Controller
      */
     public function create()
     {
+        $this->authorize('create rooms');
         $areas = Area::all();
         return view('board.rooms.create' , compact('areas' ) );
     }
@@ -35,6 +37,7 @@ class RoomController extends Controller
      */
     public function store(StoreRoomRequest $request)
     {
+        $this->authorize('create rooms');
         $room = new Room;
         $room->name = $request->name;
         $room->user_id = Auth::id();
@@ -71,6 +74,7 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
+        $this->authorize('show rooms');
         $room->load(['user' , 'area'  , 'images' ]);
         return view('board.rooms.show' , compact('room') );
     }
@@ -80,6 +84,7 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
+        $this->authorize('update rooms');
         $areas = Area::all();
         return view('board.rooms.edit' , compact('room' , 'areas'  ) );
     }
@@ -90,7 +95,7 @@ class RoomController extends Controller
     public function update(UpdateRoomRequest $request, Room $room)
     {
 
-      
+        $this->authorize('update rooms');
         if ($request->hasFile('image')) {
             $room->image = basename($request->file('image')->store('rooms'));
         }

@@ -15,6 +15,7 @@ class AreaController extends Controller
      */
     public function index()
     {
+        $this->authorize('list areas');
         return view('board.areas.index');
     }
 
@@ -23,6 +24,7 @@ class AreaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create areas');
         return view('board.areas.create');
     }
 
@@ -31,6 +33,7 @@ class AreaController extends Controller
      */
     public function store(StoreAreaRequest $request)
     {
+        $this->authorize('create areas');
         $area = new Area;
         $area->user_id = Auth::id();
         $area->setTranslation('name' , 'ar' , $request->name );
@@ -45,6 +48,7 @@ class AreaController extends Controller
      */
     public function show(Area $area)
     {
+        $this->authorize('show areas');
         $area->load('user');
         return view('board.areas.show' , compact('area') );
     }
@@ -54,6 +58,7 @@ class AreaController extends Controller
      */
     public function edit(Area $area)
     {
+        $this->authorize('update areas');
         return view('board.areas.edit' , compact('area') );
     }
 
@@ -62,6 +67,7 @@ class AreaController extends Controller
      */
     public function update(UpdateAreaRequest $request,Area $area)
     {
+        $this->authorize('update areas');
         $area->setTranslation('name' , 'ar' , $request->name );
         $area->is_active = $request->filled('is_active') ? 1 : 0;
         if ($request->hasFile('image')) {

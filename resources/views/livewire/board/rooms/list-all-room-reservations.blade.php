@@ -44,6 +44,7 @@
 
 
 
+                            @can('update rooms reservations')
                             @if ($reservation->status  == 1 )
                             <div class='col-6 col-sm-4 col-md-2 col-xl-auto '>
                                 <a class="btn btn-primary w-100 btn-icon" wire:click="$emit('approve' , {{ $reservation->id }} )" aria-label="Facebook">
@@ -65,6 +66,7 @@
                               </a>
                           </div>
                           @endif
+                          @endcan
 
                       </td>
                   </tr>
@@ -84,8 +86,8 @@
 
         Livewire.on('approve', itemId => {
 
-         Livewire.emit('deleteITem' , itemId )
-         $.toast({
+           Livewire.emit('deleteITem' , itemId )
+           $.toast({
             heading: 'Confirmation',
             text: 'approve successfully ',
             hideAfter: 5000 , 
@@ -95,7 +97,7 @@
             allowToastClose: false , 
         })
 
-     });
+       });
 
         Livewire.on('cancel', itemId => {
 

@@ -18,6 +18,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $this->authorize('list admins');
         return view('board.admins.index');
     }
 
@@ -26,6 +27,7 @@ class AdminController extends Controller
      */
     public function create()
     {
+        $this->authorize('create admins');
         $permissions = Permission::get();
         return view('board.admins.create' , compact('permissions') );
     }
@@ -35,6 +37,7 @@ class AdminController extends Controller
      */
     public function store(StoreAdminRequest $request)
     {
+        $this->authorize('create admins');
         $admin = new User;
         $admin->name = $request->name;
         $admin->email = $request->email;
@@ -54,6 +57,7 @@ class AdminController extends Controller
      */
     public function show(User $admin)
     {
+        $this->authorize('show admins');
         $admin->load('user' , 'permissions' );
         return view('board.admins.show' , compact('admin'));
     }
@@ -63,6 +67,7 @@ class AdminController extends Controller
      */
     public function edit(User $admin)
     {
+        $this->authorize('edit admins');
         $user_permissions = $admin->permissions()->pluck('name')->toArray();
         $permissions = Permission::get();
         return view('board.admins.edit' , compact('admin' , 'permissions' , 'user_permissions' ));
@@ -73,6 +78,7 @@ class AdminController extends Controller
      */
     public function update(UpdateAdminRequest $request, User $admin)
     {
+        $this->authorize('edit admins');
         $admin->name = $request->name;
         $admin->email = $request->email;
         if ($request->filled('password')) {

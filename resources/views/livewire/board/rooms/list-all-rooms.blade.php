@@ -69,7 +69,9 @@
 
 
                                 <td class='row g-2 align-items-center' >
-                                    <div class='col-6 col-sm-4 col-md-2 col-xl-auto '>
+                                   
+                                   @can('show rooms reservations')
+                                       <div class='col-6 col-sm-4 col-md-2 col-xl-auto '>
                                         <a href="{{ route('board.rooms.reservations.index' , $room) }}" class="btn btn-info w-100 btn-icon" aria-label="Facebook">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event text-white" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -81,10 +83,12 @@
                                             </svg>
                                         </a>
                                     </div>
+                                   @endcan
 
 
 
-                                    <div class='col-6 col-sm-4 col-md-2 col-xl-auto '>
+                                   @can('show rooms')
+                                        <div class='col-6 col-sm-4 col-md-2 col-xl-auto '>
                                         <a href="{{ route('board.rooms.show' , $room) }}" class="btn btn-primary w-100 btn-icon" aria-label="Facebook">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -93,8 +97,10 @@
                                             </svg>
                                         </a>
                                     </div>
+                                   @endcan
 
-                                    <div class='col-6 col-sm-4 col-md-2 col-xl-auto '>
+                                    @can('update rooms' )
+                                       <div class='col-6 col-sm-4 col-md-2 col-xl-auto '>
                                         <a href="{{ route('board.rooms.edit' , $room ) }}" class="btn btn-warning w-100 btn-icon" aria-label="Facebook">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-database-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -107,7 +113,11 @@
                                         </a>
                                     </div>
 
-                                    <div class='col-6 col-sm-4 col-md-2 col-xl-auto '>
+                                    @endcan
+
+
+                                    @can('delete room')
+                                        <div class='col-6 col-sm-4 col-md-2 col-xl-auto '>
                                         <a class="btn btn-danger w-100 btn-icon" wire:click="$emit('confirmDeletion' , {{ $room->id }} )" aria-label="Facebook">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -119,6 +129,10 @@
                                             </svg>
                                         </a>
                                     </div>
+                                    @endcan
+
+
+                                    
                                 </td>
                             </tr>
                             @endforeach
