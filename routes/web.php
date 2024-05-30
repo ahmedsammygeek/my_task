@@ -13,21 +13,6 @@ use App\Http\Controllers\Board\RoomController;
 use App\Http\Controllers\Board\RoomReservationController;
 use App\Http\Controllers\Board\AdminController;
 
-Route::get('test' , function(){
-
-
-	$checkin_date = '2024-01-05';
-	$checkout_date = '2024-01-07';
-
-	$reservedCount = App\Models\ProjectReservation::where('project_id' , 17 )
-	->whereDate('start_date',  '<=', $checkout_date )
-	->whereDate('end_date',  '>=', $checkin_date)
-	->count();
-
-	dd($reservedCount);
-});
-
-
 Route::get('/', [SiteController::class , 'index' ] )->name('index');
 Route::get('/rooms', [SiteController::class , 'rooms' ] )->name('rooms.index');
 Route::get('/rooms/{room}', [SiteController::class , 'show' ] )->name('rooms.show');

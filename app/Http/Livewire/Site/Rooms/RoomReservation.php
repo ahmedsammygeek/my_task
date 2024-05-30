@@ -39,7 +39,7 @@ class RoomReservation extends Component
         $reservation->room_id = $this->room->id;
         $reservation->check_in_date = $this->start_date;
         $reservation->check_out_date = $this->end_date;
-        $reservation->status = 3;
+        $reservation->status = 1;
         $reservation->save();
         $this->alert('success', 'تم تقديم الطلب بنجاح ');
 
