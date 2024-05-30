@@ -11,16 +11,8 @@ class RoomReservationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Room $project)
+    public function index(Room $room)
     {
-        return view('board.rooms.reservations.index' , compact('project') );
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Room $project , RoomReservation $reservation)
-    {
-        return view('board.rooms.reservations.show' , compact('project' , 'reservation' ) );
+        return view('board.rooms.reservations.index' , compact('room') );
     }
 }

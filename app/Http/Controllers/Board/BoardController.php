@@ -23,9 +23,10 @@ class BoardController extends Controller
        
         $areas_count = Area::count();
         $rooms_count = Room::count();
-        $admins_count = User::count();
+        $admins_count = User::where('is_admin' , 1 )->count();
+        $users_count = User::where('is_admin' , 0 )->count();
         
-        return view('board.index' , compact( 'rooms_count' ,  'areas_count' , 'admins_count'));
+        return view('board.index' , compact( 'rooms_count'  , 'users_count',  'areas_count' , 'admins_count'));
     }
 
     public function logout() {

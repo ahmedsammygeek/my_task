@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Site\LoginController as SiteLoginController ;
+use App\Http\Controllers\Site\RegisterController  ;
+use App\Http\Controllers\Site\ProfileController ;
 use App\Http\Controllers\Board\UserController;
 use App\Http\Controllers\Board\LoginController;
 use App\Http\Controllers\Board\BoardController;
@@ -25,19 +27,19 @@ Route::get('test' , function(){
 	dd($reservedCount);
 });
 
-Route::group(
-	[
-		'prefix' => LaravelLocalization::setLocale(),
-		'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-	], function(){ 
-		Route::get('/', [SiteController::class , 'index' ] )->name('index');
-		Route::get('/rooms', [SiteController::class , 'rooms' ] )->name('rooms.index');
-		Route::get('/rooms/{room}', [SiteController::class , 'show' ] )->name('rooms.show');
-		Route::get('/login', [SiteLoginController::class , 'login_form' ] )->name('site.login.form');
-		Route::post('/login', [SiteLoginController::class , 'login' ] )->name('site.login');
-		Route::get('/register', [SiteController::class , 'register_form' ] )->name('site.register.form');
-		Route::post('/register', [SiteController::class , 'register' ] )->name('site.register');
-	});
+
+Route::get('/', [SiteController::class , 'index' ] )->name('index');
+Route::get('/rooms', [SiteController::class , 'rooms' ] )->name('rooms.index');
+Route::get('/rooms/{room}', [SiteController::class , 'show' ] )->name('rooms.show');
+Route::get('/login', [SiteLoginController::class , 'form' ] )->name('site.login.form');
+Route::post('/login', [SiteLoginController::class , 'login' ] )->name('site.login');
+Route::get('/register', [RegisterController::class , 'form' ] )->name('site.register.form');
+Route::post('/register', [RegisterController::class , 'register' ] )->name('site.register');
+
+
+Route::group(['middleware' => 'auth'], function() {
+	Route::get('/profile', [ProfileController::class , 'profile' ])->name('profile');
+});
 
 
 Route::get('Board/login' , [LoginController::class , 'form' ] )->name('board.login.form');
